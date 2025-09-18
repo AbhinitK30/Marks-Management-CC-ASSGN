@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://marks-management-backend.onrender.com/api';
 
   const fetchUser = async () => {
     try {

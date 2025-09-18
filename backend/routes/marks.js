@@ -97,9 +97,13 @@ router.post('/', auth, async (req, res) => {
     if (marks) {
       // Update existing marks
       marks.studentName = studentName || marks.studentName;
-      marks.theoryMarks = { ...marks.theoryMarks, ...theoryMarks };
-      marks.practicalMarks = { ...marks.practicalMarks, ...practicalMarks };
-      
+      marks.theoryMarks = { ...marks.theoryMarks.toObject?.() || marks.theoryMarks, ...theoryMarks };
+      marks.practicalMarks = { ...marks.practicalMarks.toObject?.() || marks.practicalMarks, ...practicalMarks };
+
+      // Ensure Mongoose recalculates derived values by flagging nested paths modified
+      marks.markModified('theoryMarks');
+      marks.markModified('practicalMarks');
+
       await marks.save();
       res.json({ message: 'Marks updated successfully', marks });
     } else {
@@ -139,8 +143,14 @@ router.put('/:id', auth, async (req, res) => {
     const { studentName, theoryMarks, practicalMarks } = req.body;
 
     if (studentName) marks.studentName = studentName;
-    if (theoryMarks) marks.theoryMarks = { ...marks.theoryMarks, ...theoryMarks };
-    if (practicalMarks) marks.practicalMarks = { ...marks.practicalMarks, ...practicalMarks };
+    if (theoryMarks) {
+      marks.theoryMarks = { ...marks.theoryMarks.toObject?.() || marks.theoryMarks, ...theoryMarks };
+      marks.markModified('theoryMarks');
+    }
+    if (practicalMarks) {
+      marks.practicalMarks = { ...marks.practicalMarks.toObject?.() || marks.practicalMarks, ...practicalMarks };
+      marks.markModified('practicalMarks');
+    }
 
     await marks.save();
     res.json({ message: 'Marks updated successfully', marks });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -25,9 +25,9 @@ const MarksForm = () => {
   const [success, setSuccess] = useState('');
 
   const navigate = useNavigate();
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://marks-management-backend.onrender.com/api';
 
-  const fetchExistingMarks = async () => {
+  const fetchExistingMarks = useCallback(async () => {
     try {
       const response = await axios.get(`${API_URL}/marks`);
       if (response.data.length > 0) {
@@ -41,11 +41,11 @@ const MarksForm = () => {
     } catch (error) {
       console.log('No existing marks found');
     }
-  };
+  }, [API_URL]);
 
   useEffect(() => {
     fetchExistingMarks();
-  }, []);
+  }, [fetchExistingMarks]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -120,6 +120,7 @@ const MarksForm = () => {
               value={formData.studentName}
               onChange={handleChange}
               required
+              readOnly
             />
           </div>
 

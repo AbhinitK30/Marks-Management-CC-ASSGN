@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [error, setError] = useState('');
   const { user } = useAuth();
 
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://marks-management-backend.onrender.com/api';
 
   const fetchMarks = useCallback(async () => {
     try {
