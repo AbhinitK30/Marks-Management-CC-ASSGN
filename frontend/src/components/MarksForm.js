@@ -86,12 +86,19 @@ const MarksForm = () => {
         processedPracticalMarks[key] = parseFloat(formData.practicalMarks[key]) || 0;
       });
 
-      await axios.post(`${API_URL}/marks`, {
+      console.log('Sending marks data:', {
+        studentName: formData.studentName,
+        theoryMarks: processedTheoryMarks,
+        practicalMarks: processedPracticalMarks
+      });
+      
+      const response = await axios.post(`${API_URL}/marks`, {
         studentName: formData.studentName,
         theoryMarks: processedTheoryMarks,
         practicalMarks: processedPracticalMarks
       });
 
+      console.log('Marks save response:', response.data);
       setSuccess('Marks saved successfully!');
       setTimeout(() => {
         navigate('/');

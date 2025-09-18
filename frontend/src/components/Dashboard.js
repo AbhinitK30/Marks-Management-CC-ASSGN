@@ -19,6 +19,7 @@ const Dashboard = () => {
       
       const response = await axios.get(`${API_URL}/marks`);
       console.log('Marks response:', response.data);
+      console.log('Response status:', response.status);
       
       if (response.data && response.data.length > 0) {
         setMarks(response.data[0]);
