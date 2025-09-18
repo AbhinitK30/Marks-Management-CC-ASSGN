@@ -50,12 +50,21 @@ const MarksForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    if (name.startsWith('theory') || name.startsWith('practical')) {
-      const [category, subject] = name.split('.');
+    if (name.startsWith('theory.')) {
+      const subject = name.split('.')[1]; // Get the subject name after 'theory.'
       setFormData(prev => ({
         ...prev,
-        [category]: {
-          ...prev[category],
+        theoryMarks: {
+          ...prev.theoryMarks,
+          [subject]: value
+        }
+      }));
+    } else if (name.startsWith('practical.')) {
+      const subject = name.split('.')[1]; // Get the subject name after 'practical.'
+      setFormData(prev => ({
+        ...prev,
+        practicalMarks: {
+          ...prev.practicalMarks,
           [subject]: value
         }
       }));
