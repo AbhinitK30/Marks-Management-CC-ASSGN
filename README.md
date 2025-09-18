@@ -27,7 +27,7 @@ A full-stack MERN (MongoDB, Express.js, React, Node.js) web application for mana
 
 ### Cloud Platform
 - **Render** - Backend hosting
-- **Netlify** - Frontend hosting
+- **Vercel** - Frontend hosting
 - **MongoDB Atlas** - Database hosting
 
 ## 📁 Project Structure
@@ -101,24 +101,30 @@ CC assignment/
 3. **Backend URL**
    - Render will provide a URL like: `https://your-app-name.onrender.com`
 
-### Step 3: Frontend Deployment on Netlify
+### Step 3: Frontend Deployment on Vercel
 
-1. **Build Frontend**
+1. **Prepare Frontend**
    ```bash
    cd frontend
    npm install
+   # optional local build; Vercel builds in the cloud
    npm run build
    ```
 
-2. **Deploy to Netlify**
-   - Connect your GitHub repository to Netlify
-   - Set build command: `npm run build`
-   - Set publish directory: `build`
-   - Add environment variable:
-     - `REACT_APP_API_URL`: Your Render backend URL
+2. **Deploy to Vercel**
+   - Go to `https://vercel.com` and log in
+   - New Project → Import Git Repository → select this repo
+   - In Project Settings:
+     - Framework Preset: `Create React App`
+     - Root Directory: `frontend`
+     - Build Command: `npm run build`
+     - Output Directory: `build`
+   - Environment Variables:
+     - `REACT_APP_API_URL` = `https://<your-render-backend>.onrender.com/api`
+   - Click Deploy
 
 3. **Frontend URL**
-   - Netlify will provide a URL like: `https://your-app-name.netlify.app`
+   - Vercel will provide a URL like: `https://your-project-name.vercel.app`
 
 ## 🔧 Local Development
 
@@ -216,7 +222,7 @@ npm start
 
 ✅ **Cloud Deployment**
 - Backend deployed on Render
-- Frontend deployed on Netlify
+- Frontend deployed on Vercel
 - Database hosted on MongoDB Atlas
 
 ## 📱 Screenshots

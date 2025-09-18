@@ -7,7 +7,7 @@ This guide will walk you through deploying your MERN stack application to the cl
 - GitHub account
 - MongoDB Atlas account (free)
 - Render account (free)
-- Netlify account (free)
+- Vercel account (free)
 
 ## 🗄️ Step 1: MongoDB Atlas Database Setup
 
@@ -81,24 +81,25 @@ In the Render dashboard, go to "Environment" tab and add:
 2. Wait for deployment to complete
 3. Note your backend URL (e.g., `https://marks-management-backend.onrender.com`)
 
-## 🌐 Step 3: Frontend Deployment on Netlify
+## 🌐 Step 3: Frontend Deployment on Vercel
 
 ### 3.1 Prepare Frontend for Deployment
 1. Make sure your frontend code is in the same GitHub repository
 2. Update the API URL in your frontend code to use environment variables
 
-### 3.2 Deploy to Netlify
-1. Go to [Netlify](https://netlify.com)
+### 3.2 Deploy to Vercel
+1. Go to [Vercel](https://vercel.com)
 2. Sign up with your GitHub account
-3. Click "New site from Git"
-4. Choose "GitHub" and select your repository
+3. Click "New Project" → Import Git Repository
+4. Choose this repository
 5. Configure the build settings:
-   - **Base directory**: `frontend`
+   - **Framework Preset**: Create React App
+   - **Root Directory**: `frontend`
    - **Build command**: `npm run build`
-   - **Publish directory**: `frontend/build`
+   - **Output directory**: `build`
 
 ### 3.3 Set Environment Variables
-In Netlify dashboard, go to "Site settings" → "Environment variables" and add:
+In Vercel Project Settings → Environment Variables, add:
 - `REACT_APP_API_URL`: Your Render backend URL + `/api`
 
 **Example:**
@@ -107,9 +108,9 @@ REACT_APP_API_URL=https://marks-management-backend.onrender.com/api
 ```
 
 ### 3.4 Deploy
-1. Click "Deploy site"
+1. Click "Deploy"
 2. Wait for deployment to complete
-3. Note your frontend URL (e.g., `https://marks-management-frontend.netlify.app`)
+3. Note your frontend URL (e.g., `https://marks-management-frontend.vercel.app`)
 
 ## 🔧 Step 4: Testing Your Deployment
 
@@ -141,7 +142,7 @@ Take screenshots of:
 
 ### 5.3 Deployment Screenshots
 1. **Render Dashboard**: Backend service status
-2. **Netlify Dashboard**: Frontend deployment status
+2. **Vercel Dashboard**: Frontend deployment status
 3. **Environment Variables**: Configuration screens
 4. **Build Logs**: Successful deployment logs
 
